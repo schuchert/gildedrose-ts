@@ -1,4 +1,3 @@
-
 export class Item {
   name: string;
   sellIn: number;
@@ -20,37 +19,47 @@ export class GildedRose {
 
   updateQuality() {
     for (const item of this.items) {
-      if (item.name != 'Aged Brie' && item.name != backstagePassesToATAFKAL80ETCConcert) {
-        if (item.quality > 0) {
-          this.decrementQuality(item);
-        }
-      } else {
+      if (item.name === 'Aged Brie') {
         if (item.quality < 50) {
           item.quality = item.quality + 1
-          if (item.name == backstagePassesToATAFKAL80ETCConcert) {
-            if (item.sellIn < 11) {
-              this.incrementQuality(item);
-            }
-            if (item.sellIn < 6) {
-              this.incrementQuality(item);
-            }
-          }
         }
-      }
-      if (item.name != sulfurasHandOfRagnaros) {
         item.sellIn = item.sellIn - 1;
-      }
-      if (item.sellIn < 0) {
-        if (item.name != 'Aged Brie') {
-          if (item.name != backstagePassesToATAFKAL80ETCConcert) {
-            if (item.quality > 0) {
-              this.decrementQuality(item);
+        if (item.sellIn < 0) {
+          this.incrementQuality(item);
+        }
+      } else {
+        if (item.name === backstagePassesToATAFKAL80ETCConcert) {
+          if (item.quality < 50) {
+            item.quality = item.quality + 1
+            if (item.name == backstagePassesToATAFKAL80ETCConcert) {
+              if (item.sellIn < 11) {
+                this.incrementQuality(item);
+              }
+              if (item.sellIn < 6) {
+                this.incrementQuality(item);
+              }
             }
-          } else {
-            item.quality = 0
           }
         } else {
-          this.incrementQuality(item);
+          if (item.quality > 0) {
+            this.decrementQuality(item);
+          }
+        }
+        if (item.name != sulfurasHandOfRagnaros) {
+          item.sellIn = item.sellIn - 1;
+        }
+        if (item.sellIn < 0) {
+          if (item.name != 'Aged Brie') {
+            if (item.name != backstagePassesToATAFKAL80ETCConcert) {
+              if (item.quality > 0) {
+                this.decrementQuality(item);
+              }
+            } else {
+              item.quality = 0
+            }
+          } else {
+            this.incrementQuality(item);
+          }
         }
       }
     }
