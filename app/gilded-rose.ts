@@ -22,23 +22,17 @@ export class GildedRose {
     for (const item of this.items) {
       if (item.name != 'Aged Brie' && item.name != backstagePassesToATAFKAL80ETCConcert) {
         if (item.quality > 0) {
-          if (item.name != sulfurasHandOfRagnaros) {
-            item.quality = item.quality - 1
-          }
+          this.decrementQuality(item);
         }
       } else {
         if (item.quality < 50) {
           item.quality = item.quality + 1
           if (item.name == backstagePassesToATAFKAL80ETCConcert) {
             if (item.sellIn < 11) {
-              if (item.quality < 50) {
-                item.quality = item.quality + 1
-              }
+              this.incrementQuality(item);
             }
             if (item.sellIn < 6) {
-              if (item.quality < 50) {
-                item.quality = item.quality + 1
-              }
+              this.incrementQuality(item);
             }
           }
         }
@@ -50,21 +44,29 @@ export class GildedRose {
         if (item.name != 'Aged Brie') {
           if (item.name != backstagePassesToATAFKAL80ETCConcert) {
             if (item.quality > 0) {
-              if (item.name != sulfurasHandOfRagnaros) {
-                item.quality = item.quality - 1
-              }
+              this.decrementQuality(item);
             }
           } else {
             item.quality = 0
           }
         } else {
-          if (item.quality < 50) {
-            item.quality = item.quality + 1
-          }
+          this.incrementQuality(item);
         }
       }
     }
 
     return this.items;
+  }
+
+  private decrementQuality(item: Item) {
+    if (item.name != sulfurasHandOfRagnaros) {
+      item.quality = item.quality - 1
+    }
+  }
+
+  private incrementQuality(item: Item) {
+    if (item.quality < 50) {
+      item.quality = item.quality + 1
+    }
   }
 }
