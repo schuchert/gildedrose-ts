@@ -15,10 +15,7 @@ export const backstagePassesToATAFKAL80ETCConcert = 'Backstage passes to a TAFKA
 export const sulfurasHandOfRagnaros = 'Sulfuras, Hand of Ragnaros';
 
 export class GildedRose {
-  items: Array<Item>;
-
-  constructor(items = [] as Array<Item>) {
-    this.items = items;
+  constructor(private items: Array<Item>) {
   }
 
   updateQuality() {
