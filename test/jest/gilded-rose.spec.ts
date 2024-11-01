@@ -17,7 +17,7 @@ describe('Gilded Rose', () => {
       const expectedQuality = tc[2];
 
       const gildedRose = new GildedRose([item]);
-      const items = gildedRose.updateQuality();
+      const items = gildedRose.updateQuality()!;
       expect(items[0].quality).toBe(expectedQuality);
       expect(items[0].sellIn).toBe(expectedSellin);
    });

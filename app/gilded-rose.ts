@@ -17,7 +17,7 @@ export class GildedRose {
   constructor(private items: Array<Item>) {
   }
 
-  updateQuality() {
+  updateQuality(): Item[] {
     for (const item of this.items) {
       if (item.name === 'Aged Brie') {
         if (item.quality < 50) {
@@ -27,39 +27,35 @@ export class GildedRose {
         if (item.sellIn < 0) {
           this.incrementQuality(item);
         }
-      } else {
-        if (item.name === backstagePassesToATAFKAL80ETCConcert) {
-          if (item.quality < 50) {
-            item.quality = item.quality + 1
-            if (item.name == backstagePassesToATAFKAL80ETCConcert) {
-              if (item.sellIn < 11) {
-                this.incrementQuality(item);
-              }
-              if (item.sellIn < 6) {
-                this.incrementQuality(item);
-              }
-            }
-          }
-        } else {
-          if (item.quality > 0) {
-            this.decrementQuality(item);
-          }
-        }
-        if (item.name != sulfurasHandOfRagnaros) {
-          item.sellIn = item.sellIn - 1;
-        }
-        if (item.sellIn < 0) {
-          if (item.name != 'Aged Brie') {
-            if (item.name != backstagePassesToATAFKAL80ETCConcert) {
-              if (item.quality > 0) {
-                this.decrementQuality(item);
-              }
-            } else {
-              item.quality = 0
-            }
-          } else {
+        return this.items;
+      }
+
+      if (item.name === backstagePassesToATAFKAL80ETCConcert) {
+        if (item.quality < 50) {
+          item.quality = item.quality + 1
+          if (item.sellIn < 11) {
             this.incrementQuality(item);
           }
+          if (item.sellIn < 6) {
+            this.incrementQuality(item);
+          }
+        }
+        item.sellIn = item.sellIn - 1;
+        if (item.sellIn < 0) {
+          item.quality = 0
+        }
+        return this.items;
+      }
+
+      if (item.quality > 0) {
+        this.decrementQuality(item);
+      }
+      if (item.name != sulfurasHandOfRagnaros) {
+        item.sellIn = item.sellIn - 1;
+      }
+      if (item.sellIn < 0) {
+        if (item.quality > 0) {
+          this.decrementQuality(item);
         }
       }
     }
